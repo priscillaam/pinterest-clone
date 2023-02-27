@@ -1,1 +1,1 @@
-# pinterest-clone
+# Pinterest PWA Clone
