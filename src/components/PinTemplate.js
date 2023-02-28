@@ -2,11 +2,19 @@ import Pin from './Pin'
 import React from 'react'
 import styled from 'styled-components'
 
-export default function PinTemplate() {
+export default function PinTemplate(props) {
+
+    let { pins } = props;
+
   return (
     <Wrapper>
         <Container>
-            <Pin />
+            {
+                pins.map((pin) => {
+                    let {urls} = pin;
+                    <Pin urls={urls}/>
+                })
+            }
         </Container>
     </Wrapper>
   )
@@ -23,6 +31,6 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
     display: flex;
-    width: 80%;
+    width: 98%;
     background-color: white;
 `

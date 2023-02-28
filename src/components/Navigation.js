@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import IconButton from '@mui/material/IconButton'
 import PinterestIcon from '@mui/icons-material/Pinterest'
@@ -8,7 +8,14 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import SmsIcon from '@mui/icons-material/Sms'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 
-function Navigation() {
+function Navigation(props) {
+    const [input, setInput] = useState("");
+
+    const onSearch = (e) => {
+        e.preventDefault();
+        props.onSubmit(input);
+    }
+
   return (
     <Wrapper>
          <LogoWrapper>
@@ -32,20 +39,20 @@ function Navigation() {
                     <SearchIcon/>
                 </IconButton>
                 <form>
-                    <input type='text' placeholder="Search" />
-                    <button type='submit'></button>
+                    <input type='text' placeholder="Search" onChange={(e) => console.log(setInput(e.target.value))} />
+                    <button type='submit' onClick={onSearch}></button>
                 </form>
             </SearchBarWrapper>
         </SearchWrapper>
         <IconsWrapper>
             <IconButton>
-                <NotificationsIcon />
+                <NotificationsIcon sx={{ fontSize: "30px" }}/>
             </IconButton>
             <IconButton>
-                <SmsIcon />
+                <SmsIcon  sx={{ fontSize: "25px" }}/>
             </IconButton>
             <IconButton>
-                <AccountCircleIcon />
+                <AccountCircleIcon sx={{ fontSize: "25px" }}/>
             </IconButton>
             <IconButton>
                 <ExpandMoreIcon />
@@ -79,7 +86,7 @@ const HomePageButtons = styled.div`
     align-items: center; 
     justify-content: center; 
     border-radius: 24px;
-    curson: pointer;
+    cursor: pointer;
     a {
         text-decoration: none; 
         font-weight: 500;
@@ -140,8 +147,8 @@ const SearchBarWrapper = styled.div`
 `
 const IconsWrapper = styled.div`
     margin-left: 20px;
-
+    margin-right: 20px;
     .MuiSvgIcon-root {
-        color: #3d3d3d;
+        color: #6a6c6e;
     }
 `
