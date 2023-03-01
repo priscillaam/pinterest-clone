@@ -1,6 +1,7 @@
 import Pin from './Pin'
 import React from 'react'
 import styled from 'styled-components'
+import '../styles/PinTemplate.css'
 
 export default function PinTemplate(props) {
 
@@ -8,11 +9,11 @@ export default function PinTemplate(props) {
 
   return (
     <Wrapper>
-        <Container>
+        <Container className='media-query-template'>
             {
-                pins.map((pin) => {
+                pins.map((pin, index) => {
                     let {urls} = pin;
-                    <Pin urls={urls}/>
+                    return <Pin key={index} urls={urls}/>
                 })
             }
         </Container>
@@ -24,13 +25,13 @@ const Wrapper = styled.div`
     background-color: white; 
     display: flex;
     width: 100%;
-    height: 100%;
     margin-top: 15px;
     justify-content: center;
 `
 
 const Container = styled.div`
-    display: flex;
-    width: 98%;
+    column-gap: 5px;
+    margin: 0 auto;
+    height: 100%;
     background-color: white;
 `

@@ -1,0 +1,54 @@
+/* below 650px search bar is an icon, when pressed home button dissapears, all icons visible, 2 columns */
+/* 650px to 754px search bar extends, only one home button all icons visible, 2 columns */
+/* 755px to 850px width and below: the search bar extends, only one home button all icons visible 3 columns */
+@media (min-width: 0px) and (max-width: 754px) {
+    .media-query-template {
+        column-count: 2;
+    }
+}
+@media (min-width: 755px) and (max-width: 1000px) {
+    .media-query-template {
+        column-count: 3;
+    }
+}
+@media (min-width: 1001px) and (max-width: 1259px) {
+    .media-query-template {
+        column-count: 4;
+    }
+}
+@media (min-width: 1260px) and (max-width: 1509px) {
+    .media-query-template {
+        column-count: 5;
+    }
+}
+@media (min-width: 1510px) and (max-width: 1763px) {
+    .media-query-template {
+        column-count: 6;
+    }
+}
+@media (min-width: 1764px) and (max-width: 2015px) {
+    .media-query-template {
+        column-count: 7;
+    }
+}
+@media (min-width: 2016px) and (max-width: 2266px) {
+    .media-query-template {
+        column-count: 8;
+    }
+}
+@media (min-width: 2267px) and (max-width: 2518px) {
+    .media-query-template {
+        column-count: 9;
+    }
+}
+@media (min-width: 2519px) and (max-width: 2770px) {
+    .media-query-template {
+        column-count: 10;
+    }
+}
+
+@media (min-width: 2771px) {
+    .media-query-template {
+        column-count: 11;
+    }
+}

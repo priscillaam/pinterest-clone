@@ -5,7 +5,10 @@ import FileUpload from '@mui/icons-material/FileUploadOutlined';
 import MoreHorizontal from '@mui/icons-material/MoreHoriz';
 import IconButton from '@mui/material/IconButton';
 
-function Pin() {
+function Pin(props) {
+
+    let {urls} = props;
+
     return (
       <Wrapper>
         <Container>
@@ -22,7 +25,7 @@ function Pin() {
             <MoreButton>
                 <MoreHorizontal sx={{ fontSize: "18px" }}/>
             </MoreButton>
-            <img src='https://i.pinimg.com/564x/9e/01/55/9e0155e6863cf3965c93898bd1200026.jpg' />
+            <img src={urls?.regular} alt='pin'/>
         </Container>
       </Wrapper>
     )
@@ -31,16 +34,17 @@ function Pin() {
 export default Pin
 
 const Wrapper = styled.div`
-    display: inline-flex;
+    display: block;
     padding: 8px;
 `
 
 const Container = styled.div`
     display: flex;
-    align-items: center;
+    position: relative;
     box-sizing: border-box;
     cursor: pointer;
     width: 236px;
+
     img {
         display: block; 
         width: 100%;
@@ -68,7 +72,8 @@ const SaveButton = styled.div`
     ${Container}: hover & {
         display: flex;
         position: absolute;
-        transform: translateX(250%) translateY(-365%);
+        top: 10px;
+        right: 10px;
     }
 `
 const LinkButton = styled.div`
@@ -94,7 +99,8 @@ const LinkButton = styled.div`
     ${Container}: hover & {
         display: flex;
         position: absolute;
-        transform: translateX(10%) translateY(575%);
+        bottom: 10px;
+        left: 10px;
     }
 `
 const SelectButton = styled.div`
@@ -119,11 +125,13 @@ const SelectButton = styled.div`
 `
 const ShareButton = styled(SelectButton)`
     ${Container}: hover & {
-        transform: translateX(450%) translateY(575%);
+        bottom: 10px;
+        right: 50px;
     }
 `
 const MoreButton = styled(SelectButton)`
     ${Container}: hover & {
-        transform: translateX(570%) translateY(575%);
+        bottom: 10px;
+        right: 10px;
     }
 `
