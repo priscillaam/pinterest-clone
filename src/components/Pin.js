@@ -17,7 +17,7 @@ function Pin(props) {
             </SaveButton>
             <LinkButton>
                 <OutwardArrow sx={{ fontSize: "15px" }}/>
-                <a>link...</a>
+                <a href={urls?.regular}>{urls?.regular}</a>
             </LinkButton>
             <ShareButton>
                 <FileUpload sx={{ fontSize: "18px" }}/>
@@ -78,16 +78,20 @@ const SaveButton = styled.div`
 `
 const LinkButton = styled.div`
     display: none; 
-    height: 32px; 
-    max-width: 100%;
-    align-items: center; 
-    padding: 0 15px 0 8px;
+    height: 25px; 
+    width: 48%;
+    text-align: center;
+    justify-content: center;
+    padding: 5px 8px 0 8px;
     border-radius: 24px;
     cursor: pointer;
     background-color: #e1e1e1;
     color: black;
     font-weight: 600;
     font-size: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     :hover {
         background-color: #f0f0f0;
@@ -95,9 +99,11 @@ const LinkButton = styled.div`
 
     a {
         margin-left: 5px;
+        text-decoration: none;
+        color: black;
     }
     ${Container}: hover & {
-        display: flex;
+        display: inline;
         position: absolute;
         bottom: 10px;
         left: 10px;
