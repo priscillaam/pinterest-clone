@@ -1,8 +1,28 @@
 import './App.css';
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import Navigation from './components/Navigation';
 import PinTemplate from './components/PinTemplate';
 import unsplash from './api/unsplash'
+
+
+/* Read me please!!!
+
+Current fixes to do: 
+**make buttons into functional dropdown menus selectors
+ 1. Fully responsive navigation profile and selector buttons
+ 2. Home pins
+ 3. Search pins
+ 4. Today pin board with functional board pin accumulation
+ 5. update build for netlify and run
+
+ optimize performance code splitting: https://www.youtube.com/watch?v=j8NJc60H294
+ pwa: https://www.youtube.com/watch?v=IaJqMcOMuDM
+ pins: https://www.youtube.com/watch?v=wV734HJbrpc&t=7777s
+ 
+ **update build for netlify again
+
+*/
+
 
 function App() {
   const [pins, setPins] = useState([]);
