@@ -3,13 +3,13 @@ import React from 'react'
 import styled from 'styled-components'
 import '../styles/PinTemplate.css'
 
-export default function PinTemplate(props) {
+export default function TodayTemplate(props) {
 
     let { pins } = props;
 
   return (
     <Wrapper>
-        {/* <p>Home Pins</p> */}
+        {/* <p>Today's Pins</p> */}
         <Container className='media-query-template'>
             {
                 pins.map((pin, index) => {
@@ -19,7 +19,7 @@ export default function PinTemplate(props) {
             }
         </Container>
     </Wrapper>
-  );
+  )
 }
 
 const Wrapper = styled.div`

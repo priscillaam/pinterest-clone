@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import IconButton from '@mui/material/IconButton'
 import PinterestIcon from '@mui/icons-material/Pinterest'
@@ -7,17 +7,73 @@ import SearchIcon from '@mui/icons-material/SearchSharp'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import SmsIcon from '@mui/icons-material/Sms'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
+import {CreateDropdown, ProfileDropdown} from './Dropdown'
 
 function Navigation(props) {
     const [input, setInput] = useState("");
+    const [mobile, setMobile] = useState(false);
+    const [createOpen, setCreateOpen] = useState(false);
+    const dropDownRef = useRef(null);
+    const [profileOpen, setProfileOpen] = useState(false);
+    const profileRef = useRef(null);
 
     const onSearch = (e) => {
         e.preventDefault();
         props.onSubmit(input);
     }
 
+    const handleResize = () => {
+        if (window.innerWidth < 720) {
+            setMobile(true)
+        } else {
+            setMobile(false)
+        }
+      }
+    
+    // create an event listener
+    useEffect(() => {
+    window.addEventListener("resize", handleResize)
+    }, []);
+
+    const createToggle = (e) => {
+        setCreateOpen(!createOpen);
+        e.preventDefault();
+    }
+    const profileToggle = (e) => {
+        setProfileOpen(!profileOpen);
+        e.preventDefault();
+    }
+
+    //this use effect was programmed with the assistance of AI
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if(dropDownRef.current && !dropDownRef.current.contains(e.target)){
+                setCreateOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [dropDownRef]);
+
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if(profileRef.current && !profileRef.current.contains(e.target)){
+                setProfileOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [profileRef]);
+
   return (
     <Wrapper>
+         {!mobile ? (<>
          <LogoWrapper>
             <IconButton>
                 <PinterestIcon />
@@ -27,11 +83,13 @@ function Navigation(props) {
             <a href="/">Home</a>
         </HomeButton>
         <TodayButton>
-            <a href="/">Today</a>
+            <a href="/today">Today</a>
         </TodayButton>
-        <CreateButton>
+        
+        <CreateButton onClick={(e) => {createToggle(e)}} ref={dropDownRef}>
             <a href="/">Create</a>
-            <ExpandMoreIcon />
+            <ExpandMoreIcon /> 
+            {createOpen && (<CreateDropdown />)}
         </CreateButton>
         <SearchWrapper>
             <SearchBarWrapper>
@@ -54,10 +112,17 @@ function Navigation(props) {
             <IconButton>
                 <AccountCircleIcon sx={{ fontSize: "25px" }}/>
             </IconButton>
-            <IconButton>
+            <IconButton onClick={(e) => {profileToggle(e)}} ref={profileRef}>
                 <ExpandMoreIcon />
+                {profileOpen && (<ProfileDropdown />)}
             </IconButton>
         </IconsWrapper>
+        </>) : (
+            <>
+            <div>Temporary Nav</div>
+            </>
+        )
+        }
     </Wrapper>
   )
 }
@@ -109,8 +174,9 @@ const TodayButton = styled(HomePageButtons)`
 const CreateButton = styled(HomePageButtons)`
     background-color: white;
     margin-right: 20px;
+    position: relative;
     a { 
-        color: balck;
+        color: black;
         margin-right: 3px;
     }
 `

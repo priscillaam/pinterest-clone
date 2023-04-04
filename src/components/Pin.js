@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import OutwardArrow from '@mui/icons-material/NorthEast';
 import FileUpload from '@mui/icons-material/FileUploadOutlined';
 import MoreHorizontal from '@mui/icons-material/MoreHoriz';
-import IconButton from '@mui/material/IconButton';
 
 function Pin(props) {
 

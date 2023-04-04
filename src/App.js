@@ -2,7 +2,10 @@ import './App.css';
 import React, {useState} from 'react'
 import Navigation from './components/Navigation';
 import PinTemplate from './components/PinTemplate';
-import unsplash from './api/unsplash'
+import unsplash from './api/unsplash';
+import Footer from './components/Footer.js';
+import TodayTemplate from './components/TodayTemplate';
+import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 /* Read me please!!!
@@ -86,8 +89,14 @@ function App() {
 
   return (
     <div className="App">
-      <Navigation onSubmit={onSearch}/>
-      <PinTemplate pins={pins}/>
+      <Router>
+        <Navigation onSubmit={onSearch}/>
+        <Routes>
+          <Route exact path="/" element={<PinTemplate pins={pins}/>}/>
+          <Route exact path ="/today" element={<TodayTemplate pins={pins} />} />
+        </Routes>
+        <Footer />
+      </Router>
     </div>
   );
 }
