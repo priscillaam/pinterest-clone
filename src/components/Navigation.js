@@ -8,6 +8,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import SmsIcon from '@mui/icons-material/Sms'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import {CreateDropdown, ProfileDropdown} from './Dropdown'
+import { Link } from "react-router-dom";
 
 function Navigation(props) {
     const [input, setInput] = useState("");
@@ -16,6 +17,8 @@ function Navigation(props) {
     const dropDownRef = useRef(null);
     const [profileOpen, setProfileOpen] = useState(false);
     const profileRef = useRef(null);
+    const [homeActive, setHomeActive] = useState(true);
+    const [todayActive, setTodayActive] = useState(false);
 
     const onSearch = (e) => {
         e.preventDefault();
@@ -29,7 +32,6 @@ function Navigation(props) {
             setMobile(false)
         }
       }
-    
     // create an event listener
     useEffect(() => {
     window.addEventListener("resize", handleResize)
@@ -78,17 +80,16 @@ function Navigation(props) {
             <IconButton>
                 <PinterestIcon />
             </IconButton>
-        </LogoWrapper> 
-        <HomeButton>
-            <a href="/">Home</a>
+        </LogoWrapper>
+        <HomeButton onClick={() => {setHomeActive(true); setTodayActive(!todayActive)}} id={homeActive === true ? 'active' : ''}>
+            <Link to="/">Home</Link>
         </HomeButton>
-        <TodayButton>
-            <a href="/today">Today</a>
+        <TodayButton onClick={() => {setHomeActive(!homeActive); setTodayActive(true)}} id={todayActive === true ? 'active' : ''}>
+            <Link to="/today">Today</Link>
         </TodayButton>
-        
         <CreateButton onClick={(e) => {createToggle(e)}} ref={dropDownRef}>
-            <a href="/">Create</a>
-            <ExpandMoreIcon /> 
+            <Link to="/">Create</Link>
+            <ExpandMoreIcon />
             {createOpen && (<CreateDropdown />)}
         </CreateButton>
         <SearchWrapper>
@@ -130,8 +131,8 @@ function Navigation(props) {
 export default Navigation
 
 const Wrapper = styled.div `
-    display: flex; 
-    align-items: center; 
+    display: flex;
+    align-items: center;
     height: 56px;
     padding: 12px 4px 4px 16px;
     background-color: white;
@@ -145,37 +146,49 @@ const LogoWrapper = styled.div`
     }
 `
 const HomePageButtons = styled.div`
-    display: flex; 
-    height: 48px; 
+    display: flex;
+    height: 48px;
     min-width: 75px;
-    align-items: center; 
-    justify-content: center; 
+    align-items: center;
+    justify-content: center;
     border-radius: 24px;
     cursor: pointer;
     a {
-        text-decoration: none; 
         font-weight: 500;
+        text-decoration: none;
     }
 `
 
-const HomeButton = styled(HomePageButtons)` 
-    background-color: rgb(17, 17, 17);
-    a {
-        color: white;
-    }
-`
-const TodayButton = styled(HomePageButtons)`
+const HomeButton = styled(HomePageButtons)`
     background-color: white;
-    margin-right: 15px;
     a {
         color: black;
     }
+    #active {
+        background-color: rgb(17, 17, 17);
+        a {
+            color: white;
+        }
+    }
+`
+const TodayButton = styled(HomePageButtons)`
+    margin-right: 15px;
+    background-color: white;
+    a {
+        color: black;
+    }
+    &:target{
+        background-color: rgb(17, 17, 17);
+        a {
+            color: white;
+        }
+    }
 `
 const CreateButton = styled(HomePageButtons)`
-    background-color: white;
     margin-right: 20px;
     position: relative;
-    a { 
+    background-color: white;
+    a {
         color: black;
         margin-right: 3px;
     }
@@ -186,19 +199,18 @@ const SearchWrapper = styled.div`
 
 const SearchBarWrapper = styled.div`
     background-color: #efefef;
-    display: flex; 
+    display: flex;
     height: 48px;
     width: 100%;
     border-radius: 50px;
     border: none;
     padding-left: 10px;
-    
     form {
         display: flex;
         flex: 1;
     }
     form > input {
-        background-color: transparent; 
+        background-color: transparent;
         border: none;
         width: 100%;
         margin-left: 5px;
