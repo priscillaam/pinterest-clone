@@ -94,7 +94,7 @@ function Navigation(props) {
             <Link to="/today">Today</Link>
         </TodayButton>
         <CreateButton onClick={(e) => {createToggle(e)}} ref={dropDownRef}>
-            <Link to="/">Create</Link>
+            <Link to="/search">Create</Link>
             <ExpandMoreIcon />
             {createOpen && (<CreateDropdown />)}
         </CreateButton>
