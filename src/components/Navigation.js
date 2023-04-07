@@ -8,7 +8,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications'
 import SmsIcon from '@mui/icons-material/Sms'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import {CreateDropdown, ProfileDropdown} from './Dropdown'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import '../styles/Navigation.css'
 
 function Navigation(props) {
     const [input, setInput] = useState("");
@@ -19,11 +20,6 @@ function Navigation(props) {
     const profileRef = useRef(null);
     const [homeActive, setHomeActive] = useState(true);
     const [todayActive, setTodayActive] = useState(false);
-
-    const onSearch = (e) => {
-        e.preventDefault();
-        props.onSubmit(input);
-    }
 
     const handleResize = () => {
         if (window.innerWidth < 720) {
@@ -73,6 +69,16 @@ function Navigation(props) {
         };
     }, [profileRef]);
 
+    // const history = createBrowserHistory({forceRefresh:true});
+    
+    const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    props.onSubmit(input);
+    navigate("/search"); 
+    // onSearch(e);
+  };
+
   return (
     <Wrapper>
          {!mobile ? (<>
@@ -81,10 +87,10 @@ function Navigation(props) {
                 <PinterestIcon />
             </IconButton>
         </LogoWrapper>
-        <HomeButton onClick={() => {setHomeActive(true); setTodayActive(!todayActive)}} id={homeActive === true ? 'active' : ''}>
+        <HomeButton onClick={() => {setHomeActive(true); setTodayActive(false)}} id={homeActive === true ? 'active' : ''}>
             <Link to="/">Home</Link>
         </HomeButton>
-        <TodayButton onClick={() => {setHomeActive(!homeActive); setTodayActive(true)}} id={todayActive === true ? 'active' : ''}>
+        <TodayButton onClick={() => {setHomeActive(false); setTodayActive(true)}} id={todayActive === true ? 'active' : ''}>
             <Link to="/today">Today</Link>
         </TodayButton>
         <CreateButton onClick={(e) => {createToggle(e)}} ref={dropDownRef}>
@@ -99,7 +105,7 @@ function Navigation(props) {
                 </IconButton>
                 <form>
                     <input type='text' placeholder="Search" onChange={(e) => console.log(setInput(e.target.value))} />
-                    <button type='submit' onClick={onSearch}></button>
+                    <button type='submit' onClick={(handleSubmit)}></button>
                 </form>
             </SearchBarWrapper>
         </SearchWrapper>
@@ -164,24 +170,12 @@ const HomeButton = styled(HomePageButtons)`
     a {
         color: black;
     }
-    #active {
-        background-color: rgb(17, 17, 17);
-        a {
-            color: white;
-        }
-    }
 `
 const TodayButton = styled(HomePageButtons)`
     margin-right: 15px;
     background-color: white;
     a {
         color: black;
-    }
-    &:target{
-        background-color: rgb(17, 17, 17);
-        a {
-            color: white;
-        }
     }
 `
 const CreateButton = styled(HomePageButtons)`

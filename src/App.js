@@ -1,12 +1,12 @@
 import './App.css';
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import Navigation from './components/Navigation';
 import PinTemplate from './components/PinTemplate';
 import unsplash from './api/unsplash';
 import Footer from './components/Footer.js';
 import TodayTemplate from './components/TodayTemplate';
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-
+import SearchTemplate from './components/SearchTemplate';
 
 /* Read me please!!!
 
@@ -25,10 +25,7 @@ Current fixes to do:
  **update build for netlify again
 
 */
-
-
 function App() {
-  const [pins, setPins] = useState([]);
 
   const getImages = (term) => {
     return unsplash.get('https://api.unsplash.com/search/photos', {
@@ -38,53 +35,59 @@ function App() {
       }
     });
   }
+  // const [pins, setPins] = useState([]);
 
-
-
+  const [searchPins, setSearchPins] = useState([]);
   const onSearch = (term) => {
+    setSearchPins([]);
     console.log('term: ', term);
     getImages(term).then((res)=>{
       let results = res.data.results;
 
       let newPins = [
         ...results,
-        ...pins,
       ]
 
-      // newPins.sort(function(a, b) {
-      //   return 0.5 - Math.random();
-      // });
-      setPins(newPins);
-    })
+      newPins.sort(function(a, b) {
+        return 0.5 - Math.random();
+      });
+      setSearchPins(newPins);
+    });
   }
+  
+  const [homePins, setHomePins] = useState([]);
 //only when Home is pressed to randomize pins
-  // const getNewPins = () => {
-  //   let promises = [];
-  //   let pinData = [];
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const getNewPins = () => {
+    let promises = [];
+    let pinData = [];
 
-  //   let pins = ['ocean', 'Tokyo', 'dogs', 'cats'];
 
-  //   pins.forEach((pinTerm) => {
-  //     promises.push(
-  //       getImages(pinTerm).then((res) => {
-  //         let results = res.data.results;
+    let homePins = ['ocean', 'Tokyo', 'dogs', 'cats'];
 
-  //         pinData = pinData.concat(results);
+    homePins.forEach((pinTerm) => {
+      promises.push(
+        getImages(pinTerm).then((res) => {
+          let results = res.data.results;
 
-  //         pinData.sort(function(a, b){
-  //           return .5 - Math.random();
-  //         });
-  //       })
-  //     )
-  //   })
-  //   Promise.all(promises).then(() => {
-  //     setPins(pinData);
-  //   });
-  // };
+          pinData = pinData.concat(results);
 
-  // useEffect(() => {
-  //   getNewPins()
-  // }, []);
+          pinData.sort(function(a, b){
+            return .5 - Math.random();
+          });
+        })
+      )
+    })
+    Promise.all(promises).then(() => {
+      setHomePins(pinData);
+    });
+  };
+
+  useEffect(() => {
+    getNewPins();
+  }, []);
+
+  
 
 
   return (
@@ -92,8 +95,9 @@ function App() {
       <Router>
         <Navigation onSubmit={onSearch}/>
         <Routes>
-          <Route exact path="/" element={<PinTemplate pins={pins}/>}/>
-          <Route exact path ="/today" element={<TodayTemplate pins={pins} />} />
+          <Route exact path="/" element={<PinTemplate pins={homePins}/>}/>
+          <Route exact path ="/today" element={<TodayTemplate pins={homePins} />} />
+          <Route exact path="/search" element={<SearchTemplate pins={searchPins} />} />
         </Routes>
         <Footer />
       </Router>
