@@ -74,6 +74,8 @@ function Navigation(props) {
     const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    setHomeActive(false); 
+    setTodayActive(false);
     props.onSubmit(input);
     navigate("/search"); 
     // onSearch(e);
@@ -94,7 +96,7 @@ function Navigation(props) {
             <Link to="/today">Today</Link>
         </TodayButton>
         <CreateButton onClick={(e) => {createToggle(e)}} ref={dropDownRef}>
-            <Link to="/search">Create</Link>
+            <Link>Create</Link>
             <ExpandMoreIcon />
             {createOpen && (<CreateDropdown />)}
         </CreateButton>

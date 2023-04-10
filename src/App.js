@@ -13,10 +13,7 @@ import SearchTemplate from './components/SearchTemplate';
 Current fixes to do: 
 **make buttons into functional dropdown menus selectors
  1. Fully responsive navigation profile and selector buttons
- 2. Home pins
- 3. Search pins
  4. Today pin board with functional board pin accumulation
- 5. update build for netlify and run
 
  optimize performance code splitting: https://www.youtube.com/watch?v=j8NJc60H294
  pwa: https://www.youtube.com/watch?v=IaJqMcOMuDM
@@ -35,7 +32,17 @@ function App() {
       }
     });
   }
-  // const [pins, setPins] = useState([]);
+
+  const getTodayImages = (term) => {
+    return unsplash.get('https://api.unsplash.com/search/photos', {
+      params: {
+        query: term,
+        per_page: 1,
+        orientation: 'portrait'
+      }
+    });
+  }
+
 
   const [searchPins, setSearchPins] = useState([]);
   const onSearch = (term) => {
@@ -56,6 +63,7 @@ function App() {
   }
   
   const [homePins, setHomePins] = useState([]);
+
 //only when Home is pressed to randomize pins
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const getNewPins = () => {
@@ -83,8 +91,35 @@ function App() {
     });
   };
 
+  const [todayPins, setTodayPins] = useState([]);
+  const getTodayPins = () => {
+    let promises = [];
+    let pinData = [];
+
+
+    let todayPins = ['skincare', 'flower store', 'summer style', 'interior decoration', 'outdoor patio decoration', 'ethnic meal', 'jewelry aesthetic'];
+
+    todayPins.forEach((pinTerm) => {
+      promises.push(
+        getTodayImages(pinTerm).then((res) => {
+          let results = res.data.results;
+
+          pinData = pinData.concat(results);
+
+          pinData.sort(function(a, b){
+            return .5 - Math.random();
+          });
+        })
+      )
+    })
+    Promise.all(promises).then(() => {
+      setTodayPins(pinData);
+    });
+  };
+
   useEffect(() => {
     getNewPins();
+    getTodayPins();
   }, []);
 
   
@@ -96,7 +131,7 @@ function App() {
         <Navigation onSubmit={onSearch}/>
         <Routes>
           <Route exact path="/" element={<PinTemplate pins={homePins}/>}/>
-          <Route exact path ="/today" element={<TodayTemplate pins={homePins} />} />
+          <Route exact path ="/today" element={<TodayTemplate pins={todayPins} />} />
           <Route exact path="/search" element={<SearchTemplate pins={searchPins} />} />
         </Routes>
         <Footer />
