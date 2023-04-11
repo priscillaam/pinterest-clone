@@ -17,7 +17,7 @@ function CreateDropdown(){
 function ProfileDropdown() {
   return (
     <ProfileDropDownContainer >
-    <DropDownList>
+    <ProfileDropDownList>
     <Label>Currently in</Label>
     <h1>Profile</h1>
     <br/>
@@ -43,7 +43,7 @@ function ProfileDropdown() {
             <OutwardArrow sx={{ fontSize: "18px" }}/>
         </ProfileListItem>
         <ProfileListItem>Log out</ProfileListItem>
-    </DropDownList>
+    </ProfileDropDownList>
     </ProfileDropDownContainer> 
   )
 }
@@ -64,29 +64,34 @@ const ProfileDropDownContainer = styled(DropDownContainer)`
     top: 40px;
     left: -225px;
     width: 285px;
+    // height: 700px;
+    // overflow: hidden;
+    // overflow-y: scroll;
+    // overflow: scroll;
 `
 
 const DropDownList = styled.ul`
     background: white;
-    box-sizing: border-box; 
+    box-sizing: border-box;
     box-shadow: 0 0 1px 1px rgba(225, 225, 225);
     border-radius: 12px;
     color: black;
     font-weight: 600;
-    padding: 15px;
+    padding: 10px;
 `
+const ProfileDropDownList = styled(DropDownList)`
 
+`
 const ListItem = styled("li")`
   list-style: none;
   border-radius: 8px;
-  height: 40px;
+  height: 36px;
   display: flex;
   flex-direction: row;
   align-items: center;
   padding-left: 5px;
 
   &:hover{
-    outline: 4px solid #6bc4ff;
     background-color: rgba(238, 238, 238);
   }
 `;

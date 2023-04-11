@@ -10,10 +10,15 @@ import SearchTemplate from './components/SearchTemplate';
 
 /* Read me please!!!
 
-Current fixes to do: 
+Current fixes to do:
 **make buttons into functional dropdown menus selectors
  1. Fully responsive navigation profile and selector buttons
- 4. Today pin board with functional board pin accumulation
+ 2. Scrollable dropdown
+ 3. Profile section of dropdown
+ 4. notification dropdown (only shows loading icon)
+ 5. messages dropdown (only shows loading icon)
+ 6. profile page
+ 7. Connect firebase to save show saved pins - google authentication (you can do it!) - extra
 
  optimize performance code splitting: https://www.youtube.com/watch?v=j8NJc60H294
  pwa: https://www.youtube.com/watch?v=IaJqMcOMuDM
@@ -105,10 +110,6 @@ function App() {
           let results = res.data.results;
 
           pinData = pinData.concat(results);
-
-          pinData.sort(function(a, b){
-            return .5 - Math.random();
-          });
         })
       )
     })

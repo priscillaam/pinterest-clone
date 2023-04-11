@@ -70,14 +70,13 @@ function Navigation(props) {
     }, [profileRef]);
 
     // const history = createBrowserHistory({forceRefresh:true});
-    
     const navigate = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-    setHomeActive(false); 
+    setHomeActive(false);
     setTodayActive(false);
     props.onSubmit(input);
-    navigate("/search"); 
+    navigate("/search");
     // onSearch(e);
   };
 
@@ -141,10 +140,13 @@ export default Navigation
 const Wrapper = styled.div `
     display: flex;
     align-items: center;
-    height: 56px;
+    height: 68px;
     padding: 12px 4px 4px 16px;
     background-color: white;
     color: black;
+    position: sticky;
+    top: 0;
+    z-index: 10;
 `
 const LogoWrapper = styled.div`
     .MuiSvgIcon-root {
