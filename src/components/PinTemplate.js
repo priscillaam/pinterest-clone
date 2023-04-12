@@ -23,10 +23,10 @@ export default function PinTemplate(props) {
 }
 
 const Wrapper = styled.div`
-    background-color: white; 
+    background-color: white;
     display: flex;
     width: 100%;
-    margin-top: 15px;
+    margin: 0 20px;
     justify-content: center;
 `
 

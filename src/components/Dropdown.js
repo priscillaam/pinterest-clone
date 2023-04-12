@@ -1,9 +1,38 @@
 import React from 'react';
 import styled from 'styled-components';
 import OutwardArrow from '@mui/icons-material/NorthEast';
-
+import avatar from '../assets/avatar.jpg';
+import { Link } from "react-router-dom";
 
 function CreateDropdown(){
+  return (
+    <CreateDropDownContainer >
+    <DropDownList>
+        <ListItem>Create Idea Pin</ListItem>
+        <ListItem>Create Pin</ListItem>
+    </DropDownList>
+    </CreateDropDownContainer> 
+  )
+}
+function SelectMobileDropdown(props){
+  return (
+    <SelectDropDownContainer >
+    <DropDownList>
+      <Link to="/"><ListItem onClick={() => {props.setSelected('Home')}}>Home</ListItem></Link>
+      <Link to="/today"><ListItem onClick={() => {props.setSelected('Today')}}>Today</ListItem></Link>
+    </DropDownList>
+    </SelectDropDownContainer>
+  )
+}
+
+function NotifDropdown(){
+  return (
+    <NotifDropdownContainer >
+    </NotifDropdownContainer> 
+  )
+}
+
+function MsgDropdown(){
   return (
     <CreateDropDownContainer >
     <DropDownList>
@@ -19,8 +48,14 @@ function ProfileDropdown() {
     <ProfileDropDownContainer >
     <ProfileDropDownList>
     <Label>Currently in</Label>
-    <h1>Profile</h1>
-    <br/>
+      <ProfileItem>
+        <Avatar><img alt='avatar' src={avatar} /></Avatar>
+        <ProfileText>
+        <ProfileNameWrapper>Profile Name</ProfileNameWrapper>
+        <TextWrapper>Personal</TextWrapper>
+        <TextWrapper>Email@email.com</TextWrapper>
+        </ProfileText>
+      </ProfileItem>
     <Label>Your accounts</Label>
         <ProfileListItem>Add account</ProfileListItem>
         <ProfileListItem>Convert to business</ProfileListItem>
@@ -48,7 +83,7 @@ function ProfileDropdown() {
   )
 }
 
-export {CreateDropdown, ProfileDropdown};
+export {CreateDropdown, ProfileDropdown, NotifDropdown, SelectMobileDropdown};
 
 const DropDownContainer = styled.div`
     position: absolute;
@@ -60,16 +95,22 @@ const DropDownContainer = styled.div`
 const CreateDropDownContainer = styled(DropDownContainer)`
     width: 175px;
 `
+const SelectDropDownContainer = styled(DropDownContainer)`
+  width: 175px;
+  line-height: 0;
+`
+const NotifDropdownContainer = styled(DropDownContainer)`
+    width: 200px;
+    background: white;
+    border-radius: 12px;
+    height: 400px;
+`
 const ProfileDropDownContainer = styled(DropDownContainer)`
     top: 40px;
-    left: -225px;
-    width: 285px;
-    // height: 700px;
-    // overflow: hidden;
-    // overflow-y: scroll;
-    // overflow: scroll;
+    left: -255px;
+    width: 315px;
+    border-radius: 18px;
 `
-
 const DropDownList = styled.ul`
     background: white;
     box-sizing: border-box;
@@ -80,7 +121,9 @@ const DropDownList = styled.ul`
     padding: 10px;
 `
 const ProfileDropDownList = styled(DropDownList)`
-
+  height: 562px;
+  overflow-y: scroll;
+  border-radius: 18px;
 `
 const ListItem = styled("li")`
   list-style: none;
@@ -90,23 +133,46 @@ const ListItem = styled("li")`
   flex-direction: row;
   align-items: center;
   padding-left: 5px;
-
   &:hover{
     background-color: rgba(238, 238, 238);
   }
 `;
-
 const ProfileListItem = styled(ListItem)`
   font-size: 17px;
   font-weight: 550;
-  height: 36px;
   text-align: left;
   justify-content: space-between;
   &:hover{
     outline: none;
   }
 `;
-
+const ProfileItem = styled(ListItem)`
+  height: 76px;
+  padding: 5px;
+  display: inline-block;
+  align-items: center;
+  width: 100%;
+`;
+const Avatar = styled.div`
+  float: left;
+  height: 100%;
+  width: 75px;
+  img {
+    height: 66px;
+    border-radius: 50%;
+  }
+`;
+const ProfileText = styled.div`
+  text-align: left;
+`;
+const TextWrapper = styled.div`
+  font-size: 12px;
+  font-weight: 200;
+`;
+const ProfileNameWrapper = styled(TextWrapper)`
+    font-size: 18px;
+    font-weight: 500;
+`;
 const Label = styled('p')`
   font-size: 12px;
   font-weight: 400;

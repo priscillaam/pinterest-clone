@@ -6,6 +6,11 @@
         column-count: 2;
     }
 }
+@media (min-width: 755px) {
+    html{
+        overflow-x: hidden;
+      }
+}
 @media (min-width: 755px) and (max-width: 1000px) {
     .media-query-template {
         column-count: 3;

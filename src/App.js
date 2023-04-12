@@ -7,17 +7,16 @@ import Footer from './components/Footer.js';
 import TodayTemplate from './components/TodayTemplate';
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SearchTemplate from './components/SearchTemplate';
+import ProfileTemplate from './components/ProfileTemplate';
 
 /* Read me please!!!
 
 Current fixes to do:
 **make buttons into functional dropdown menus selectors
  1. Fully responsive navigation profile and selector buttons
- 2. Scrollable dropdown
- 3. Profile section of dropdown
  4. notification dropdown (only shows loading icon)
  5. messages dropdown (only shows loading icon)
- 6. profile page
+ 6. finish profile page
  7. Connect firebase to save show saved pins - google authentication (you can do it!) - extra
 
  optimize performance code splitting: https://www.youtube.com/watch?v=j8NJc60H294
@@ -123,8 +122,6 @@ function App() {
     getTodayPins();
   }, []);
 
-  
-
 
   return (
     <div className="App">
@@ -134,8 +131,8 @@ function App() {
           <Route exact path="/" element={<PinTemplate pins={homePins}/>}/>
           <Route exact path ="/today" element={<TodayTemplate pins={todayPins} />} />
           <Route exact path="/search" element={<SearchTemplate pins={searchPins} />} />
+          <Route exact path="/profile" element={<ProfileTemplate pins={homePins}/>} />
         </Routes>
-        <Footer />
       </Router>
     </div>
   );

@@ -23,7 +23,7 @@ export default function TodayTemplate(props) {
     <Phrase>
         <p>Stay Inspired</p>
     </Phrase>
-    <Wrapper>
+    <Wrapper >
         <Container>
             {
                 pins.map((pin, index) => {
@@ -100,4 +100,5 @@ const Button = styled.button`
 	outline: inherit;
     border-radius: 32px;
     margin-top: 40px;
+    margin-bottom: 75px;
 `

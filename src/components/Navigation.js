@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/SearchSharp'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import SmsIcon from '@mui/icons-material/Sms'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import {CreateDropdown, ProfileDropdown} from './Dropdown'
+import {CreateDropdown, ProfileDropdown, SelectMobileDropdown} from './Dropdown'
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/Navigation.css'
 
@@ -18,8 +18,11 @@ function Navigation(props) {
     const dropDownRef = useRef(null);
     const [profileOpen, setProfileOpen] = useState(false);
     const profileRef = useRef(null);
+    const [selectOpen, setSelectOpen] = useState(false);
+    const selectRef = useRef(null);
     const [homeActive, setHomeActive] = useState(true);
     const [todayActive, setTodayActive] = useState(false);
+    const [selected, setSelected] = useState('Home');
 
     const handleResize = () => {
         if (window.innerWidth < 720) {
@@ -41,7 +44,10 @@ function Navigation(props) {
         setProfileOpen(!profileOpen);
         e.preventDefault();
     }
-
+    const selectToggle = (e) => {
+        setSelectOpen(!selectOpen);
+        e.preventDefault();
+    }
     //this use effect was programmed with the assistance of AI
     useEffect(() => {
         function handleClickOutside(e) {
@@ -79,7 +85,11 @@ function Navigation(props) {
     navigate("/search");
     // onSearch(e);
   };
-
+  const handleChange = (e) => {
+    e.preventDefault();
+    navigate(`/${e.target.value}`);
+    // onSearch(e);
+  };
   return (
     <Wrapper>
          {!mobile ? (<>
@@ -118,7 +128,9 @@ function Navigation(props) {
                 <SmsIcon  sx={{ fontSize: "25px" }}/>
             </IconButton>
             <IconButton>
+            <Link to="/profile">
                 <AccountCircleIcon sx={{ fontSize: "25px" }}/>
+                </Link>
             </IconButton>
             <IconButton onClick={(e) => {profileToggle(e)}} ref={profileRef}>
                 <ExpandMoreIcon />
@@ -127,7 +139,42 @@ function Navigation(props) {
         </IconsWrapper>
         </>) : (
             <>
-            <div>Temporary Nav</div>
+            <LogoWrapper>
+            <IconButton>
+                <PinterestIcon />
+            </IconButton>
+        </LogoWrapper>
+        <SelectDiv onClick={(e) => {selectToggle(e)}} ref={selectRef}>
+            <Link>{selected}</Link>
+            <ExpandMoreIcon />
+            {selectOpen && (<SelectMobileDropdown setSelected={setSelected}/>)}
+        </SelectDiv>
+        <SearchWrapper>
+            <SearchBarWrapper>
+                    <SearchIcon />
+                <form>
+                    <input type='text' placeholder="Search" onChange={(e) => console.log(setInput(e.target.value))} />
+                    <button type='submit' onClick={(handleSubmit)}></button>
+                </form>
+            </SearchBarWrapper>
+        </SearchWrapper>
+        <IconsWrapper>
+            <IconButton>
+                <NotificationsIcon sx={{ fontSize: "30px" }}/>
+            </IconButton>
+            <IconButton>
+                <SmsIcon  sx={{ fontSize: "25px" }}/>
+            </IconButton>
+            <IconButton>
+            <Link to="/profile">
+                <AccountCircleIcon sx={{ fontSize: "25px" }}/>
+                </Link>
+            </IconButton>
+            <IconButton onClick={(e) => {profileToggle(e)}} ref={profileRef}>
+                <ExpandMoreIcon />
+                {profileOpen && (<ProfileDropdown />)}
+            </IconButton>
+        </IconsWrapper>
             </>
         )
         }
@@ -196,13 +243,14 @@ const SearchWrapper = styled.div`
 `
 
 const SearchBarWrapper = styled.div`
+    padding: 0px 10px 0px;
     background-color: #efefef;
     display: flex;
     height: 48px;
+    align-items: center;
     width: 100%;
     border-radius: 50px;
     border: none;
-    padding-left: 10px;
     form {
         display: flex;
         flex: 1;
@@ -227,4 +275,11 @@ const IconsWrapper = styled.div`
     .MuiSvgIcon-root {
         color: #6a6c6e;
     }
+`
+const SelectDiv = styled(CreateButton)`
+    margin: 10px;
+    padding: 0px 10px 0px;
+    &:hover{
+        background-color: rgba(238, 238, 238);
+      }
 `
