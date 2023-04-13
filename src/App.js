@@ -85,6 +85,34 @@ function App() {
     });
   };
 
+  const [profilePins, setProfilePins] = useState([]);
+  const getProfilePins = () => {
+    let promises = [];
+    let pinData = [];
+
+
+    let profilePins = ['grass meadow', 'wildflowers', 'modest fashion', 'skin care'];
+
+    profilePins.forEach((pinTerm) => {
+      promises.push(
+        getImages(pinTerm).then((res) => {
+          let results = res.data.results;
+
+          pinData = pinData.concat(results);
+
+          pinData.sort(function(a, b){
+            return .5 - Math.random();
+          });
+        })
+      )
+    })
+    Promise.all(promises).then(() => {
+      setProfilePins(pinData);
+    });
+  };
+
+  
+
   const [todayPins, setTodayPins] = useState([]);
   const getTodayPins = () => {
     let promises = [];
@@ -110,6 +138,7 @@ function App() {
   useEffect(() => {
     getNewPins();
     getTodayPins();
+    getProfilePins();
   }, []);
 
   return (
@@ -120,7 +149,7 @@ function App() {
           <Route exact path="/" element={<PinTemplate pins={homePins}/>}/>
           <Route exact path ="/today" element={<TodayTemplate pins={todayPins} />} />
           <Route exact path="/search" element={<SearchTemplate pins={searchPins} />} />
-          <Route exact path="/profile" element={<ProfileTemplate pins={homePins}/>} />
+          <Route exact path="/profile" element={<ProfileTemplate pins={profilePins}/>} />
         </Routes>
       </Router>
     </div>

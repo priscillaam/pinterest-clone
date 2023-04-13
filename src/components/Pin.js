@@ -7,13 +7,12 @@ import MoreHorizontal from '@mui/icons-material/MoreHoriz';
 function Pin(props) {
 
     let {urls} = props;
-
     return (
       <Wrapper>
         <Container>
-            <SaveButton>
+            {!props.profilePin && <SaveButton>
                 Save
-            </SaveButton>
+            </SaveButton>}
             <LinkButton>
                 <OutwardArrow sx={{ fontSize: "15px" }}/>
                 <a href={urls?.regular}>{urls?.regular}</a>
@@ -24,7 +23,7 @@ function Pin(props) {
             <MoreButton>
                 <MoreHorizontal sx={{ fontSize: "18px" }}/>
             </MoreButton>
-            <img src={urls?.regular} alt='pin'/>
+            <img  src={urls?.regular} alt='pin'/>
         </Container>
       </Wrapper>
     )
@@ -51,6 +50,10 @@ const Container = styled.div`
         border-radius: 16px;
         object-fit: cover; 
     }
+    :hover img{
+        -webkit-filter: brightness(70%);
+    }
+}
 `
 const SaveButton = styled.div`
     display: none; 
@@ -73,6 +76,7 @@ const SaveButton = styled.div`
         position: absolute;
         top: 10px;
         right: 10px;
+        z-index: 5;
     }
 `
 const LinkButton = styled.div`
@@ -106,6 +110,7 @@ const LinkButton = styled.div`
         position: absolute;
         bottom: 10px;
         left: 10px;
+        z-index: 5;
     }
 `
 const SelectButton = styled.div`
@@ -126,17 +131,20 @@ const SelectButton = styled.div`
     ${Container}: hover & {
         display: flex;
         position: absolute;
+        z-index: 5;
     }
 `
 const ShareButton = styled(SelectButton)`
     ${Container}: hover & {
         bottom: 10px;
         right: 50px;
+        z-index: 5;
     }
 `
 const MoreButton = styled(SelectButton)`
     ${Container}: hover & {
         bottom: 10px;
         right: 10px;
+        z-index: 5;
     }
 `

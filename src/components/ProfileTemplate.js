@@ -46,7 +46,8 @@ export default function ProfileTemplate(props) {
             {
                 pins.map((pin, index) => {
                     let {urls} = pin;
-                    return <Pin key={index} urls={urls}/>
+                    let show = true;
+                    return <Pin key={index} urls={urls} profilePin={show}/>
                 })
             }
         </Container>

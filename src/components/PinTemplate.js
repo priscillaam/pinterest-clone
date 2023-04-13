@@ -12,9 +12,11 @@ export default function PinTemplate(props) {
         {/* <p>Home Pins</p> */}
         <Container className='media-query-template'>
             {
+
                 pins.map((pin, index) => {
                     let {urls} = pin;
-                    return <Pin key={index} urls={urls}/>
+                    let show = false;
+                    return <Pin key={index} urls={urls} profilePin={show}/>
                 })
             }
         </Container>
