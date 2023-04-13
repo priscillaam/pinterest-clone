@@ -7,7 +7,7 @@ import SearchIcon from '@mui/icons-material/SearchSharp'
 import NotificationsIcon from '@mui/icons-material/Notifications'
 import SmsIcon from '@mui/icons-material/Sms'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
-import {CreateDropdown, ProfileDropdown, SelectMobileDropdown} from './Dropdown'
+import {CreateDropdown, MsgDropdown, NotifDropdown, ProfileDropdown, SelectMobileDropdown} from './Dropdown'
 import { Link, useNavigate } from "react-router-dom";
 import '../styles/Navigation.css'
 
@@ -15,17 +15,21 @@ function Navigation(props) {
     const [input, setInput] = useState("");
     const [mobile, setMobile] = useState(false);
     const [createOpen, setCreateOpen] = useState(false);
-    const dropDownRef = useRef(null);
+    const createRef = useRef(null);
     const [profileOpen, setProfileOpen] = useState(false);
     const profileRef = useRef(null);
     const [selectOpen, setSelectOpen] = useState(false);
     const selectRef = useRef(null);
+    const [notifOpen, setNotifOpen] = useState(false);
+    const notifRef = useRef(null);
+    const [msgOpen, setMsgOpen] = useState(false);
+    const msgRef = useRef(null);
     const [homeActive, setHomeActive] = useState(true);
     const [todayActive, setTodayActive] = useState(false);
     const [selected, setSelected] = useState('Home');
 
     const handleResize = () => {
-        if (window.innerWidth < 720) {
+        if (window.innerWidth < 856) {
             setMobile(true)
         } else {
             setMobile(false)
@@ -48,10 +52,18 @@ function Navigation(props) {
         setSelectOpen(!selectOpen);
         e.preventDefault();
     }
+    const notifToggle = (e) => {
+        setNotifOpen(!notifOpen);
+        e.preventDefault();
+    }
+    const msgToggle = (e) => {
+        setMsgOpen(!msgOpen);
+        e.preventDefault();
+    }
     //this use effect was programmed with the assistance of AI
     useEffect(() => {
         function handleClickOutside(e) {
-            if(dropDownRef.current && !dropDownRef.current.contains(e.target)){
+            if(createRef.current && !createRef.current.contains(e.target)){
                 setCreateOpen(false);
             }
         }
@@ -60,7 +72,7 @@ function Navigation(props) {
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
-    }, [dropDownRef]);
+    }, [createRef]);
 
     useEffect(() => {
         function handleClickOutside(e) {
@@ -75,6 +87,45 @@ function Navigation(props) {
         };
     }, [profileRef]);
 
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if(selectRef.current && !selectRef.current.contains(e.target)){
+                setSelectOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [selectRef]);
+
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if(notifRef.current && !notifRef.current.contains(e.target)){
+                setNotifOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [notifRef]);
+
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if(msgRef.current && !msgRef.current.contains(e.target)){
+                setMsgOpen(false);
+            }
+        }
+        document.addEventListener('mousedown', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [msgRef]);
+
     // const history = createBrowserHistory({forceRefresh:true});
     const navigate = useNavigate();
   const handleSubmit = (e) => {
@@ -83,11 +134,6 @@ function Navigation(props) {
     setTodayActive(false);
     props.onSubmit(input);
     navigate("/search");
-    // onSearch(e);
-  };
-  const handleChange = (e) => {
-    e.preventDefault();
-    navigate(`/${e.target.value}`);
     // onSearch(e);
   };
   return (
@@ -104,7 +150,7 @@ function Navigation(props) {
         <TodayButton onClick={() => {setHomeActive(false); setTodayActive(true)}} id={todayActive === true ? 'active' : ''}>
             <Link to="/today">Today</Link>
         </TodayButton>
-        <CreateButton onClick={(e) => {createToggle(e)}} ref={dropDownRef}>
+        <CreateButton onClick={(e) => {createToggle(e)}} ref={createRef}>
             <Link>Create</Link>
             <ExpandMoreIcon />
             {createOpen && (<CreateDropdown />)}
@@ -121,11 +167,13 @@ function Navigation(props) {
             </SearchBarWrapper>
         </SearchWrapper>
         <IconsWrapper>
-            <IconButton>
+            <IconButton onClick={(e) => {notifToggle(e)}} ref={notifRef}>
                 <NotificationsIcon sx={{ fontSize: "30px" }}/>
+                {notifOpen && (<NotifDropdown />)}
             </IconButton>
-            <IconButton>
+            <IconButton onClick={(e) => {msgToggle(e)}} ref={msgRef}>
                 <SmsIcon  sx={{ fontSize: "25px" }}/>
+                {msgOpen && (<MsgDropdown />)}
             </IconButton>
             <IconButton>
             <Link to="/profile">
@@ -159,11 +207,13 @@ function Navigation(props) {
             </SearchBarWrapper>
         </SearchWrapper>
         <IconsWrapper>
-            <IconButton>
+            <IconButton onClick={(e) => {notifToggle(e)}} ref={notifRef}>
                 <NotificationsIcon sx={{ fontSize: "30px" }}/>
+                {notifOpen && (<NotifDropdown />)}
             </IconButton>
-            <IconButton>
+            <IconButton onClick={(e) => {msgToggle(e)}} ref={msgRef}>
                 <SmsIcon  sx={{ fontSize: "25px" }}/>
+                {msgOpen && (<MsgDropdown />)}
             </IconButton>
             <IconButton>
             <Link to="/profile">

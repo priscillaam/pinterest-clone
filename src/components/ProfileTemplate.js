@@ -3,6 +3,9 @@ import React from 'react';
 import avatar from '../assets/avatar.jpg';
 import styled from 'styled-components'
 import '../styles/PinTemplate.css';
+import TuneIcon from '@mui/icons-material/Tune';
+import AddIcon from '@mui/icons-material/Add';
+import IconButton from '@mui/material/IconButton';
 
 export default function ProfileTemplate(props) {
 
@@ -28,6 +31,16 @@ export default function ProfileTemplate(props) {
             <a>Edit Profile</a>
         </ProfileButtonsContainer>
     </ProfileContainer>
+    <Wrapper>
+    <ProfileWidgetsWrapper>
+        <IconButton>
+        <TuneIcon />
+        </IconButton>
+        <IconButton>
+        <AddIcon />
+        </IconButton>
+    </ProfileWidgetsWrapper>
+    </Wrapper>
     <Wrapper>
         <Container>
             {
@@ -70,7 +83,7 @@ const ProfileContainer = styled.div`
 const AvatarContainer = styled(Wrapper)`
     img {
     height: 120px;
-    border: solid 1px black;
+    box-shadow: 0 0 1px 1px rgba(225, 225, 225);
     border-radius: 50%;
     }
 `
@@ -102,4 +115,10 @@ const ProfileButtonsContainer = styled(Wrapper)`
         background-color: #f2f3f5;
         margin: 5px;
     }
+`
+const ProfileWidgetsWrapper = styled(Wrapper)`
+    justify-content: space-between;
+    height: 36px;
+    margin: 0 auto;
+    width: 95%;
 `

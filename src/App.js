@@ -3,7 +3,6 @@ import React, {useState, useEffect} from 'react'
 import Navigation from './components/Navigation';
 import PinTemplate from './components/PinTemplate';
 import unsplash from './api/unsplash';
-import Footer from './components/Footer.js';
 import TodayTemplate from './components/TodayTemplate';
 import {BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import SearchTemplate from './components/SearchTemplate';
@@ -11,21 +10,13 @@ import ProfileTemplate from './components/ProfileTemplate';
 
 /* Read me please!!!
 
-Current fixes to do:
-**make buttons into functional dropdown menus selectors
- 1. Fully responsive navigation profile and selector buttons
- 4. notification dropdown (only shows loading icon)
- 5. messages dropdown (only shows loading icon)
- 6. finish profile page
- 7. Connect firebase to save show saved pins - google authentication (you can do it!) - extra
+Current to do:
+ 7. Connect firebase to save show saved pins - google authentication (you can do it!) - optional
 
  optimize performance code splitting: https://www.youtube.com/watch?v=j8NJc60H294
- pwa: https://www.youtube.com/watch?v=IaJqMcOMuDM
- pins: https://www.youtube.com/watch?v=wV734HJbrpc&t=7777s
- 
- **update build for netlify again
 
 */
+
 function App() {
 
   const getImages = (term) => {
@@ -65,7 +56,6 @@ function App() {
       setSearchPins(newPins);
     });
   }
-  
   const [homePins, setHomePins] = useState([]);
 
 //only when Home is pressed to randomize pins
@@ -75,7 +65,7 @@ function App() {
     let pinData = [];
 
 
-    let homePins = ['ocean', 'Tokyo', 'dogs', 'cats'];
+    let homePins = ['skincare', 'flower shop', 'summer fashion', 'interior design'];
 
     homePins.forEach((pinTerm) => {
       promises.push(
@@ -121,7 +111,6 @@ function App() {
     getNewPins();
     getTodayPins();
   }, []);
-
 
   return (
     <div className="App">

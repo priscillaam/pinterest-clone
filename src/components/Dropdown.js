@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import OutwardArrow from '@mui/icons-material/NorthEast';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import IconButton from '@mui/material/IconButton';
 import avatar from '../assets/avatar.jpg';
 import { Link } from "react-router-dom";
 
@@ -28,18 +31,26 @@ function SelectMobileDropdown(props){
 function NotifDropdown(){
   return (
     <NotifDropdownContainer >
-    </NotifDropdownContainer> 
+      <NotifWrapper>Updates</NotifWrapper>
+    </NotifDropdownContainer>
   )
 }
 
 function MsgDropdown(){
   return (
-    <CreateDropDownContainer >
-    <DropDownList>
-        <ListItem>Create Idea Pin</ListItem>
-        <ListItem>Create Pin</ListItem>
-    </DropDownList>
-    </CreateDropDownContainer> 
+    <MsgDropdownContainer>
+      <MsgWrapper>
+        Inbox
+        <MsgIcons>
+          <IconButton>
+        <MoreHorizIcon />
+        </IconButton>
+        <IconButton>
+        <BorderColorIcon />
+        </IconButton>
+        </MsgIcons>
+      </MsgWrapper>
+    </MsgDropdownContainer>
   )
 }
 
@@ -83,7 +94,7 @@ function ProfileDropdown() {
   )
 }
 
-export {CreateDropdown, ProfileDropdown, NotifDropdown, SelectMobileDropdown};
+export {CreateDropdown, ProfileDropdown, NotifDropdown, SelectMobileDropdown, MsgDropdown};
 
 const DropDownContainer = styled.div`
     position: absolute;
@@ -99,17 +110,26 @@ const SelectDropDownContainer = styled(DropDownContainer)`
   width: 175px;
   line-height: 0;
 `
-const NotifDropdownContainer = styled(DropDownContainer)`
-    width: 200px;
-    background: white;
-    border-radius: 12px;
-    height: 400px;
-`
 const ProfileDropDownContainer = styled(DropDownContainer)`
     top: 40px;
-    left: -255px;
-    width: 315px;
+    left: -240px;
+    width: 300px;
     border-radius: 18px;
+`
+const NotifDropdownContainer = styled(ProfileDropDownContainer)`
+    background: white;
+    height: 200px;
+    box-shadow: 0 0 1px 1px rgba(225, 225, 225);
+    width: 315px;
+    top: 68px;
+    left: -130px;
+    padding: 15px;
+`
+const MsgDropdownContainer = styled(NotifDropdownContainer)`
+  top: 66px;
+  left: -170px;
+  width: 310px;
+  padding: 10px;
 `
 const DropDownList = styled.ul`
     background: white;
@@ -180,3 +200,26 @@ const Label = styled('p')`
   padding-left: 5px;
   padding: 5px;
 `;
+const MsgWrapper = styled.div`
+  font-size: 15px;
+  font-weight: 600;
+  flex-direction: row;
+  align-items: center;
+  justify-content: right;
+  color: black;
+  height: 36px;
+  display: flex;
+`
+const MsgIcons = styled.div`
+  align-items: center;
+  margin-left: 50px;
+`
+const NotifWrapper = styled.div`
+  font-size: 15px;
+  font-weight: 600;
+  width:100%;
+  align-items: center;
+  text-align: center;
+  color: black;
+  height: 36px;
+`

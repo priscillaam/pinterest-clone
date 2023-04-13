@@ -66,6 +66,9 @@ const Container = styled.div`
     background-color: white;
     column-count: 2;
     position: relative;
+    @media (max-width: 854px) {
+        column-count: 1;
+    }
 `
 const DateContainer = styled(Wrapper)`
     font-weight: 500;
