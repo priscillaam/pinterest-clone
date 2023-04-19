@@ -12,7 +12,7 @@ This project is a progressive web application, which means that it can be downlo
 
 To install the application, simply navigate to the URL where the application is hosted using Google Chrome or Microsoft Edge. Then, click on the Install button in the browser menu and follow the instructions to download and install the application. Once installed, you can launch the application from your desktop or Start menu.
 
-If you want to run the application locally, you can clone the repository and run npm install to install the dependencies. After that, you can run npm start to start the development server. However, note that this will not give you the full functionality of the progressive web application.
+If you want to run the application locally, you can clone the repository and run 'npm install' to install the dependencies. After that, you can run 'npm start' to start the development server. However, note that this will not give you the full functionality of the progressive web application.
 
 ## Features
 Home page displays stock photos imported from Unsplash API
