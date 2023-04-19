@@ -1,70 +1,26 @@
-# Pinterest PWA Clone
+# Pinterest Clone PWA
+This project is a clone of Pinterest, recreated using React and styled components. It imports stock photos from Unsplash API to fill out the pins and has several functional navigation buttons and selectors.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Purpose
+The purpose of this project is to showcase my skills in styling web pages and structuring them using React components. It is intended to be used as a demonstration for potential employers and clients.
 
-## Available Scripts
+## Technologies
+This project was built using React JavaScript, JavaScript, CSS, and HTML. Unsplash API was used to import stock images to fill out the pins.
 
-In the project directory, you can run:
+## Installation
+This project is a progressive web application, which means that it can be downloaded and installed through the browser. It is designed to function as a desktop application, but is not suitable for mobile devices.
 
-### `npm start`
+To install the application, simply navigate to the URL where the application is hosted using Google Chrome or Microsoft Edge. Then, click on the Install button in the browser menu and follow the instructions to download and install the application. Once installed, you can launch the application from your desktop or Start menu.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+If you want to run the application locally, you can clone the repository and run npm install to install the dependencies. After that, you can run npm start to start the development server. However, note that this will not give you the full functionality of the progressive web application.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
+Home page displays stock photos imported from Unsplash API
+Search bar searches for Unsplash stock photos that match the user's input
+Multiple drop-down menus and selectors
+Profile page
 
-### `npm test`
+##License
+This project is not currently licensed.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thank you for checking out my Pinterest Clone project!
